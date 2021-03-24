@@ -1,0 +1,13 @@
+version: "2.1"
+
+services:
+  front:
+    image: "homenitor/front"
+    ports:
+      - "8080:80"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://localhost:80 || exit 1"]
+      interval: 10s
+      timeout: 30s
+    volumes:
+      - ./config/frontend:/etc/nginx/conf.d
