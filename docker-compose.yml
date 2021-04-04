@@ -2,7 +2,7 @@ version: "2.1"
 
 services:
   front:
-    image: "homenitor/front"
+    image: "homenitor/front:latest"
     ports:
       - "8080:80"
     healthcheck:
