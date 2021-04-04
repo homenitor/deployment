@@ -3,6 +3,7 @@ version: "2.1"
 services:
   front:
     image: "homenitor/front:latest"
+    restart: always
     ports:
       - "8080:80"
     healthcheck:
@@ -13,6 +14,7 @@ services:
       - ./config/frontend:/etc/nginx/conf.d
   back:
     image: "homenitor/back:latest"
+    restart: always
     ports:
       - "3000:3000"
     depends_on:
@@ -23,6 +25,7 @@ services:
       timeout: 30s
   mqtt:
     image: "arm32v6/eclipse-mosquitto:latest"
+    restart: always
     ports:
       - "1883:1883"
     volumes:
