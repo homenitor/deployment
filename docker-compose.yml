@@ -16,8 +16,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      mqtt:
-        condition: service_healthy
+      - mqtt
     healthcheck:
       test: ["CMD-SHELL", "wget -q -0 /dev/null http://localhost:3000 || exit 1"]
       interval: 10s
@@ -26,9 +25,5 @@ services:
     image: "arm32v6/eclipse-mosquitto:latest"
     ports:
       - "1883:1883"
-    healthcheck:
-      test: ["CMD-SHELL", "timeout -t 5 mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1"]
-      interval: 10s
-      timeout: 30s
     volumes:
       - "./config/mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf"
